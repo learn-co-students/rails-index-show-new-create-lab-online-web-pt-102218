@@ -1,5 +1,4 @@
 class CouponsController < ApplicationController
-  
   def index
     @coupons = Coupon.all
   end
@@ -8,17 +7,13 @@ class CouponsController < ApplicationController
     @coupon = Coupon.find(params[:id])
   end
 
-  def new
-  end
+  def new; end
 
   def create
-    @coupon = Coupon.create(
-      {
-        first_name: params[:first_name],
-        last_name: params[:last_name]
-      }
-    )
+    @coupon = Coupon.new
+    @coupon[:coupon_code] = params[:coupon][:coupon_code]
+    @coupon[:store] = params[:coupon][:store]
+    @coupon.save
     redirect_to coupon_path(@coupon)
   end
-
 end
